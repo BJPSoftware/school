@@ -104,7 +104,7 @@ public class SysUser extends ExtJSBaseParameter {
         return updateTime;
     }
 
-    private void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 }

@@ -23,10 +23,6 @@ public class LoginController {
     @RequestMapping("/login")
     public ModelAndView login (SysUser sysUserModel, HttpServletRequest request, HttpServletResponse response) throws Exception{
         
-        String userName = request.getParameter("userName");
-        String userPwd = request.getParameter("uerPwd");
-        String userCh = request.getParameter("userCh");
-        
         Date now = new Date();
         SysUser sysUser = new SysUser();
         sysUser.setUserName(sysUserModel.getUserName());
@@ -39,20 +35,12 @@ public class LoginController {
         sysUserOld.setUserName(sysUserModel.getUserName());
         sysUserOld.setUserPwd(sysUserModel.getUserPwd());
         sysUserOld.setUserCh(sysUserModel.getUserCh());
+        sysUserOld.setUpdateTime(new Date());
         sysUserService.update(sysUserOld);
         //sysUserService.update(sysUserOld, "8a8a88265278465a015278465c450000");
         
         
-        ModelAndView mav = null;
-        if ("portal".equals(userCh)){
-            mav = new ModelAndView("/desktop/portal");
-            mav.addObject("常规界面", " hello  "+userName);
-
-        } else {
-            mav = new ModelAndView("/desktop/desktop");
-            mav.addObject("desktop界面", " hello  "+userName);
-        }
-        
+        ModelAndView mav = new ModelAndView("/desktop/desktop");
         return mav;        
     }
 }
