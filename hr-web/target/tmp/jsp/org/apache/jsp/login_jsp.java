@@ -56,19 +56,16 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       if (_jspx_meth_c_set_0(_jspx_page_context))
         return;
       out.write("\r\n");
-      out.write("<!DOCTYPE>\r\n");
+      out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
       out.write("<head>\r\n");
-      out.write("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\r\n");
-      out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
-      out.write("<title>智慧校园人力资源管理平台-登录</title>\r\n");
+      out.write("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n");
+      out.write("<title>Insert title here</title>\r\n");
       out.write("</head>\r\n");
       out.write("<body>\r\n");
       out.write("<form action=\"login/login\" method=\"post\">\r\n");
       out.write("    用户名:<input type=\"text\" name=\"userName\"/>\r\n");
       out.write("     密码:<input type=\"text\" name=\"userPwd\"/><br>\r\n");
-      out.write("     <input type=\"radio\" name=\"userCh\" value=\"portal\" checked>经典界面\r\n");
-      out.write("     <input type=\"radio\" name=\"userCh\" value=\"desktop\">类桌面界面\r\n");
       out.write("    <input type=\"submit\" value=\"提交\"/>\r\n");
       out.write("</form>\r\n");
       out.write("</body>\r\n");

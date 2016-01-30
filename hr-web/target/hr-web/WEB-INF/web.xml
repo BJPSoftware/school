@@ -49,7 +49,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springmvc</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*.jsp</url-pattern>
     </servlet-mapping>
     <!-- 字符过滤 -->
     <filter>
@@ -78,6 +78,6 @@
     </filter-mapping>      
     <!-- 默认跳转到根目录下的页面，在这里为login.jsp -->
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

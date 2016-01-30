@@ -6,11 +6,9 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script>
-</script>
-<script id="microloader" type="text/javascript" src="${pageContext.request.contextPath}/static/bootstrap.js"></script>
 <title>智慧校园人力资源管理平台</title>
-
+<script id="microloader" type="text/javascript" src="${contextPath}/static/bootstrap.js"></script>
+这是桌面系统
 </head>
 <body>
 </body>

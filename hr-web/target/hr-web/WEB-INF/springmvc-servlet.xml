@@ -27,7 +27,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
             value="org.springframework.web.servlet.view.JstlView" />
         <property
             name="prefix"
-            value="/WEB-INF/view/" />
+            value="/" />
         <property
             name="suffix"
             value=".jsp" />
