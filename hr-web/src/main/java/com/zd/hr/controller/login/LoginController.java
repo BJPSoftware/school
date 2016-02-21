@@ -3,7 +3,7 @@ package com.zd.hr.controller.login;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.apache.shiro.crypto.hash.Sha256Hash;
 
 import com.zd.core.controller.ExtJSBaseController;
 import com.zd.hr.domain.sys.SysUser;
@@ -24,33 +25,32 @@ public class LoginController extends ExtJSBaseController<SysUser> {
     private SysUserService sysUserService;   
     
     @RequestMapping("/login")
-    public ModelAndView login (SysUser sysUserModel, HttpServletRequest request, HttpServletResponse response) throws Exception{
-        
-//        Date now = new Date();
-        SysUser sysUser = new SysUser();
-        sysUser.setUserName(sysUserModel.getUserName());
-        sysUser.setUserPwd(sysUserModel.getUserPwd());
-        //sysUser.setUserCh(sysUserModel.getUserCh());
-   
-        //sysUserService.persist(sysUser);
-        
-//        SysUser sysUserOld = sysUserService.get("8a8a88265278488c0152784a97480000");
-//        sysUserOld.setUserName(sysUserModel.getUserName());
-//        sysUserOld.setUserPwd(sysUserModel.getUserPwd());
-        //sysUserOld.setUserCh(sysUserModel.getUserCh());
-//        sysUserOld.setUpdateTime(new Date());
-//        sysUserService.update(sysUserOld);
-        //sysUserService.update(sysUserOld, "8a8a88265278465a015278465c450000");
-        
+    public void login (SysUser sysUserModel, HttpServletRequest request, HttpServletResponse response) throws Exception{
         Map<String, Object> result = new HashMap<String, Object>();
+        SysUser sysUser = sysUserService.getByProerties("userName", sysUserModel.getUserName());
+        if (sysUser == null) { // 用户名有误或已被禁用
+            result.put("result", -1);
+            writeJSON(response, result);
+            return;
+        }
+        String tt = new Sha256Hash(sysUserModel.getUserPwd()).toHex();
+        if (!sysUser.getUserPwd().equals(new Sha256Hash(sysUserModel.getUserPwd()).toHex())) { // 密码错误
+            result.put("result", -2);
+            writeJSON(response, result);
+            return;
+        }
+//        sysUser.setLastLoginTime(new Date());
+//        sysUserService.merge(sysUser);
+//        Subject subject = SecurityUtils.getSubject();
+//        subject.login(new UsernamePasswordToken(sysUserModel.getEmail(), sysUserModel.getPassword(), sysUserModel.isRememberMe()));
+//        Session session = subject.getSession();
+//        session.setAttribute(SESSION_SYS_USER, sysUser);
+//        session.setAttribute("ROLE_KEY", sysUser.getRoles().iterator().next().getRoleKey());
         result.put("result", 1);
-        //writeJSON(response, result);        
-        ModelAndView mav = new ModelAndView("desktop/desktop");
-        return mav; 
-        //writeJSON(response, "success");
+        writeJSON(response, result);
     }
     @RequestMapping("/desktop")
     public String desktop(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        return "desktop/desktop";
+        return "index";
     }
 }
