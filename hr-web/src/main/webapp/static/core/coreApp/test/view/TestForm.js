@@ -1,0 +1,17 @@
+Ext.define("core.test.view.TestForm",{
+	extend:"core.app.base.BaseForm",
+	alias:"widget.testform",
+	funCode:"testmodule_main",
+	itemId:"testmodule_main_baseform",
+	items:[{
+		name:"name",
+		labelField:"名称"
+	},{
+		name:"code",
+		labelField:"编码"
+	},{
+		name:"birthday",
+		labelField:"出生日期",
+		xtype:"datetimefield"
+	}]
+});

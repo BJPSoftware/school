@@ -30,7 +30,8 @@ public class SysUserTest {
     public final void testUserSave() {
         SysUser sysUser = new SysUser();
         sysUser.setUserName("admin");
-        sysUser.setUserPwd("888888");
+        sysUser.setUserPwd("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e");
+        sysUser.setUserStatu(0);
         sysUser.setUserCh("超级管理员");
 
         sysUserService.persist(sysUser);

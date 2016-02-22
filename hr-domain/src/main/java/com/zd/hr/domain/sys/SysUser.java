@@ -1,5 +1,6 @@
 package com.zd.hr.domain.sys;
 
+import java.security.Principal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -46,6 +47,9 @@ public class SysUser extends ExtJSBaseParameter {
     @Column(name = "USER_CH", length = 32, nullable = true)
     private String userCh;
 
+    @Column(name="USER_STATU", columnDefinition="int")
+    private int userStatu; 
+    
     @Column(name = "CREATE_TIME", nullable = false, columnDefinition = "datetime", updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime = new Date();
@@ -90,7 +94,14 @@ public class SysUser extends ExtJSBaseParameter {
     public void setUserCh(String userCh) {
         this.userCh = userCh;
     }
+    
+    public int getUserStatu() {
+        return userStatu;
+    }
 
+    public void setUserStatu(int userStatu) {
+        this.userStatu = userStatu;
+    }
     // @JsonSerialize(using = DateTimeSerializer.class)
     public Date getCreatTime() {
         return createTime;

@@ -1,0 +1,22 @@
+Ext.define("core.test.view.TestGrid",{
+	extend:"core.app.base.BaseGrid",
+	alias:"widget.testgrid",
+	funCode:"testmodule_main",
+	itemId:"testmodule_main_basegrid",
+	columns:[{
+		text:"名称",
+		dataIndex:"name",
+		field:{
+			xtype:"textfield"
+		}
+	},{
+		text:"编码",
+		dataIndex:"code"
+	},{
+		text:"出生日期",
+		dataIndex:"birthday",
+		field:{
+			xtype:"datetimefield"
+		}		
+	}]
+});

@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Java企业通用开发平台框架 - 登录</title>
+		<title>智慧校园人力资源管理平台 - 登录</title>
 
 		<meta name="description" content="Java企业通用开发平台框架 |登录页面" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -58,7 +58,7 @@
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
 												<i class="ace-icon fa fa-coffee green"></i>
-												登录Java企业通用开发平台框架
+												登录智慧校园人力资源管理平台
 											</h4>
 
 											<div class="space-6"></div>
@@ -106,23 +106,6 @@
 
 										</div><!-- /.widget-main -->
 
-										<div class="toolbar clearfix">
-											<div>
-												<a href="#" data-target="#forgot-box" class="forgot-password-link">
-													<i class="ace-icon fa fa-arrow-left"></i>
-													忘记密码？
-												</a>
-											</div>
-
-											<div>
-												<a href="#" data-target="#signup-box" class="user-signup-link">
-													立即注册
-													<i class="ace-icon fa fa-arrow-right"></i>
-												</a>
-											</div>
-										</div>
-									</div><!-- /.widget-body -->
-								</div><!-- /.login-box -->
 
 								<div id="forgot-box" class="forgot-box widget-box no-border">
 									<div class="widget-body">
@@ -170,114 +153,6 @@
 										</div>
 									</div><!-- /.widget-body -->
 								</div><!-- /.forgot-box -->
-
-								<div id="signup-box" class="signup-box widget-box no-border">
-									<div class="widget-body">
-										<div class="widget-main">
-											<h4 class="header green lighter bigger">
-												<i class="ace-icon fa fa-users blue"></i>
-												注册Java企业通用开发平台框架
-											</h4>
-
-											<div class="space-6"></div>
-
-											<form id="validationRegisterForm" method="post" action="#">
-												<fieldset>
-												    <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="userName" name="userName" type="text" class="form-control" placeholder="姓名" />
-															<i class="ace-icon fa fa-user"></i>
-														</span>
-													</label>
-													
-													<label class="block clearfix">
-														<label>
-															<input name="sex" type="radio" class="ace" value="1" checked />
-															<span class="lbl">男</span>
-														</label>
-														<label class="pull-right">
-															<input name="sex" type="radio" class="ace" value="2" />
-															<span class="lbl">女</span>
-														</label>
-													</label>
-													
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="email" name="email" type="email" class="form-control" placeholder="邮箱" title="邮箱用于登录和找回密码" />
-															<i class="ace-icon fa fa-envelope"></i>
-														</span>
-													</label>
-													
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="phone" name="phone" type="text" class="form-control" placeholder="联系电话" />
-															<i class="ace-icon fa fa-phone"></i>
-														</span>
-													</label>
-													
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="birthday" name="birthday" type="text" class="form-control" placeholder="生日" readonly />
-															<i class="ace-icon fa fa-clock-o"></i>
-														</span>
-													</label>
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="password" name="password" type="password" class="form-control" placeholder="密码" />
-															<i class="ace-icon fa fa-lock"></i>
-														</span>
-													</label>
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input id="repeatPassword" name="repeatPassword" type="password" class="form-control" placeholder="确认密码" />
-															<i class="ace-icon fa fa-retweet"></i>
-														</span>
-													</label>
-
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input name="agree" id="agree" type="checkbox" class="ace" />
-															<span class="lbl">
-																我已阅读并接受
-																<a href="#">用户协议</a>
-															</span>
-														</span>
-													</label>
-													
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<span id="registerTip" style="color:#A94442"></span>
-														</span>
-													</label>
-
-													<div class="space-24"></div>
-
-													<div class="clearfix">
-														<button type="reset" class="width-30 pull-left btn btn-sm">
-															<i class="ace-icon fa fa-refresh"></i>
-															<span class="bigger-110">重置</span>
-														</button>
-
-														<button id="registerButton" type="button" class="width-65 pull-right btn btn-sm btn-success">
-															<span class="bigger-110">注册</span>
-															<i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-														</button>
-													</div>
-												</fieldset>
-											</form>
-										</div>
-
-										<div class="toolbar center">
-											我已注册，现在就
-											<a href="#" data-target="#login-box" class="back-to-login-link">
-												<i class="ace-icon fa fa-arrow-left"></i>
-												登录
-											</a>
-										</div>
-									</div><!-- /.widget-body -->
-								</div><!-- /.signup-box -->
 							</div><!-- /.position-relative -->
 							<div class="navbar-fixed-top align-right">
 								<br />
@@ -303,7 +178,7 @@
                     <div class="footer-content-nobordertop">
                         <span class="bigger-120">
                             <span class="blue bolder">
-                                                                                                研发中心
+                                                                                                深圳圳道电子科技有限公司
                             </span>
                             &copy; 
                             2015-2017

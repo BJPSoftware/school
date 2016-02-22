@@ -28,12 +28,12 @@ public class LoginController extends ExtJSBaseController<SysUser> {
     public void login (SysUser sysUserModel, HttpServletRequest request, HttpServletResponse response) throws Exception{
         Map<String, Object> result = new HashMap<String, Object>();
         SysUser sysUser = sysUserService.getByProerties("userName", sysUserModel.getUserName());
-        if (sysUser == null) { // 用户名有误或已被禁用
+        if (sysUser == null || 1==sysUser.getUserStatu()) { // 用户名有误或已被禁用
             result.put("result", -1);
             writeJSON(response, result);
             return;
         }
-        String tt = new Sha256Hash(sysUserModel.getUserPwd()).toHex();
+       
         if (!sysUser.getUserPwd().equals(new Sha256Hash(sysUserModel.getUserPwd()).toHex())) { // 密码错误
             result.put("result", -2);
             writeJSON(response, result);
