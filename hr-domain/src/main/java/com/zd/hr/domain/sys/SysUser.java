@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.zd.core.support.ExtJSBaseParameter;
+import com.zd.core.annotation.FieldInfo;;
 
 /**
  * 
@@ -36,6 +37,7 @@ public class SysUser extends ExtJSBaseParameter {
     private String userId;
 
     // 用户名，32长度，不能为空
+    @FieldInfo(name="用户名")
     @Column(name = "USER_NAME", length = 32, nullable = false)
     private String userName;
 

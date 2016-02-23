@@ -48,7 +48,7 @@ Ext.define('MyDesktop.App', {
             shortcuts: Ext.create('Ext.data.Store', {
                 model: 'Ext.ux.desktop.ShortcutModel',
                 data: [
-                    { name: '基础组件', iconCls: 'customers',viewIconCls:"icon_customers",xtype:"testpanel",controller:"core.test.controller.TestController",module:"testmainview"}
+                    { name: '用户管理', iconCls: 'user',viewIconCls:"icon_customer",xtype:"testpanel",controller:"core.test.controller.TestController",module:"testmainview"}
                 ]
             }),
 

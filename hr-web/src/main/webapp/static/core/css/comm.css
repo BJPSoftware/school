@@ -1,3 +1,6 @@
+.user{
+    background-image: url(./image/user.png) !important;
+}
 .customers{
 	background-image: url(./image/customers.png) !important;
 }
