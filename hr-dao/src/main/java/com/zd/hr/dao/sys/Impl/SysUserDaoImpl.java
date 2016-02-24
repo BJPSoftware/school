@@ -14,7 +14,7 @@ import com.zd.hr.domain.sys.SysUser;
  *
  */
 @Repository
-//public class SysUserDaoImpl extends BaseDao<SysUser> implements SysUserDao
+
 public class SysUserDaoImpl extends BaseDaoImpl<SysUser> implements SysUserDao {
     public SysUserDaoImpl(){
         super(SysUser.class);

@@ -191,7 +191,4 @@ public class SysRole extends ExtJSBaseParameter {
             return false;
         return true;
     }
-    
-    
-    
 }
