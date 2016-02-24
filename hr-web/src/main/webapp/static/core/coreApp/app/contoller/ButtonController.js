@@ -56,7 +56,7 @@ Ext.define("core.app.contoller.ButtonController", {
                     var insertObj = self.getDefaultValue(defaultObj);
 
                     var resObj = self.ajax({
-                        action: funData.action,
+                        url: funData.action,
                         params: insertObj
                     });
                     // var
@@ -137,7 +137,7 @@ Ext.define("core.app.contoller.ButtonController", {
                         });
                         // 发送ajax请求
                         var resObj = self.ajax({
-                            action: funData.action + "!doRemove.action",
+                            url: funData.action + "!doRemove.action",
                             params: {
                                 ids: ids.join(","),
                                 pkName: pkName
@@ -186,7 +186,7 @@ Ext.define("core.app.contoller.ButtonController", {
                             funData.modelName, funData.pkName);
                         //发送ajax
                         var resObj = self.ajax({
-                            action: funData.action + "!doUpdateList.action",
+                            url: funData.action + "!doUpdateList.action",
                             params: {
                                 strData: strData
                             }
