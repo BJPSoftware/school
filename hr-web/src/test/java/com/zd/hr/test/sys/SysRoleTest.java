@@ -29,12 +29,20 @@ public class SysRoleTest {
 
     @Test
     public final void testRoleSave() {
-        SysRole sysRole = new SysRole();
-        sysRole.setRoleName("超级管理员");
-        sysRole.setRoleCode("ROLE_ADMIN");
-        sysRole.setRoleDesc("这是超级管理员");
-        
-        sysRoleService.persist(sysRole);
+//        SysRole sysRole = new SysRole();
+//        sysRole.setRoleName("超级管理员");
+//        sysRole.setRoleCode("ROLE_ADMIN");
+//        sysRole.setRoleDesc("这是超级管理员");
+//        
+//        sysRoleService.persist(sysRole);
+    }
+    
+    @Test
+    public final void testRoleUpdate(){
+//        SysRole sysRole = sysRoleService.get("8a8a883453111e020153111e04c00000");
+//        sysRole.setRoleDesc("超级管理员修改");
+//        
+//        sysRoleService.merge(sysRole);
     }
 
 }
