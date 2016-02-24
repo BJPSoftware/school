@@ -10,14 +10,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.zd.hr.dao.sys.SysRoleDao;
 import com.zd.hr.domain.sys.SysRole;
-import com.zd.hr.service.sys.SysRolerService;
+import com.zd.hr.service.sys.SysRoleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:spring.xml" })
 public class SysRoleTest {
 
     @Resource
-    SysRolerService sysRolerService;
+    SysRoleService sysRoleService;
     
     @Resource
     SysRoleDao sysRoleDao;
@@ -34,7 +34,7 @@ public class SysRoleTest {
         sysRole.setRoleCode("ROLE_ADMIN");
         sysRole.setRoleDesc("这是超级管理员");
         
-        sysRolerService.persist(sysRole);
+        sysRoleService.persist(sysRole);
     }
 
 }

@@ -5,9 +5,9 @@ import javax.annotation.Resource;
 import com.zd.core.service.BaseServiceImpl;
 import com.zd.hr.dao.sys.SysRoleDao;
 import com.zd.hr.domain.sys.SysRole;
-import com.zd.hr.service.sys.SysRolerService;
+import com.zd.hr.service.sys.SysRoleService;
 
-public class SysRoleServiceImpl extends BaseServiceImpl<SysRole> implements SysRolerService{
+public class SysRoleServiceImpl extends BaseServiceImpl<SysRole> implements SysRoleService{
 
     @Resource
     public void setSysRoleDao(SysRoleDao sysRoleDao) {
