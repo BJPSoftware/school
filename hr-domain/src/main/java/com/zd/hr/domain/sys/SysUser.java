@@ -1,33 +1,24 @@
 package com.zd.hr.domain.sys;
 
-import java.security.Principal;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.zd.core.support.ExtJSBaseParameter;
-import com.zd.core.annotation.FieldInfo;;
+import com.zd.core.annotation.FieldInfo;
+import com.zd.core.support.ExtJSBaseParameter;;
 
 /**
- * 
- * Hello world!
+ * 系统用户实体类
+ * @author luoyibo
  *
  */
-// 注解，说明这是实体类
 @Entity
 @Table(name = "HR_SYS_USER")
 public class SysUser extends ExtJSBaseParameter {
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -36,35 +27,34 @@ public class SysUser extends ExtJSBaseParameter {
     @Column(name = "USER_ID")
     private String userId;
 
-    // 用户名，32长度，不能为空
     @FieldInfo(name="用户名")
     @Column(name = "USER_NAME", length = 32, nullable = false)
     private String userName;
 
-    // 用户密码，32长度，不能为空
-    @Column(name = "USER_PWD", length = 32, nullable = false)
+    @FieldInfo(name="用户密码")
+    @Column(name = "USER_PWD", length = 128, nullable = false)
     private String userPwd;
 
-    // 用户姓名，32长度，不能为空
+    @FieldInfo(name="用户姓名")
     @Column(name = "USER_CH", length = 32, nullable = true)
     private String userCh;
-
+    
+    @FieldInfo(name="用户状态")
     @Column(name="USER_STATU", columnDefinition="int")
     private int userStatu; 
+   
+    @FieldInfo(name="部门ID")
+    @Column (name="DEPT_ID")
+    private String deptId;
     
-    @Column(name = "CREATE_TIME", nullable = false, columnDefinition = "datetime", updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createTime = new Date();
+    @FieldInfo(name="部门名称")
+    @Column (name="DEPT_Name")
+    private String deptName;    
 
-    @Column(name = "UPDATE_TIME", nullable = false, columnDefinition = "datetime")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updateTime = new Date();
-
-    // 构造函数
-    public SysUser() {
-        super();
-    }
-
+    @FieldInfo(name="部门代码")
+    @Column(name="DEPT_CODE")
+    private String deptCode;
+    
     public String getUserId() {
         return userId;
     }
@@ -104,20 +94,28 @@ public class SysUser extends ExtJSBaseParameter {
     public void setUserStatu(int userStatu) {
         this.userStatu = userStatu;
     }
-    // @JsonSerialize(using = DateTimeSerializer.class)
-    public Date getCreatTime() {
-        return createTime;
+
+    public String getDeptId() {
+        return deptId;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public String getDeptName() {
+        return deptName;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
     }
 }

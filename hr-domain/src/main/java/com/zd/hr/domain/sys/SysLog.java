@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.zd.core.annotation.FieldInfo;
-import com.zd.core.model.BaseEntity;
+import com.zd.core.domain.BaseEntity;
 
 /**
  * <p>Project: Credo's Base</p>
@@ -20,6 +20,9 @@ import com.zd.core.model.BaseEntity;
 @Entity
 @Table(name="HR_SYS_LOG")
 public class SysLog extends BaseEntity {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid")
     @GeneratedValue(generator = "uuid")

@@ -32,20 +32,6 @@ public class BaseParameter implements Serializable{
     private String cmd;
     private String flag = "AND";
 
-//    @Id
-//    @GenericGenerator(name = "uuid", strategy = "uuid") 
-//    @GeneratedValue(generator = "uuid")
-//    @Column(name = "id")
-//    private String id; 
-//    
-//    @Column(name = "CREATE_TIME", nullable = false, columnDefinition="datetime", updatable=false)
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date createTime = new Date();
-//    
-//    @Column(name = "UPDATE_TIME", nullable = false, columnDefinition="datetime")
-//    @Temporal(TemporalType.TIMESTAMP)
-//    private Date updateTime = new Date();   
-    
     private Map<String, Object> queryDynamicConditions = new HashMap(4);
 
     private Map<String, String> sortedConditions = new LinkedHashMap(2);
@@ -140,29 +126,4 @@ public class BaseParameter implements Serializable{
         this.flag = flag;
     }
 
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-//
-//    public Date getCreateTime() {
-//        return createTime;
-//    }
-//
-//    private void setCreateTime(Date createTime) {
-//        this.createTime = createTime;
-//    }
-//
-//    public Date getUpdateTime() {
-//        return updateTime;
-//    }
-//
-//    private void setUpdateTime(Date updateTime) {
-//        this.updateTime = updateTime;
-//    }
-    
-    
 }

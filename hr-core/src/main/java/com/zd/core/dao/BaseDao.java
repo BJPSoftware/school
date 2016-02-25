@@ -274,6 +274,12 @@ public interface BaseDao<E> {
 	public List<E> doQuery(BaseParameter parameter);
 
 	/**
+	 * 根据SQL查询实体列表
+	 * @param sql
+	 * @return
+	 */
+	public List<E> doQuery(String sql);
+	/**
 	 * 根据各种查询条件返回分页列表
 	 * @param parameter 各种查询条件
 	 * @return 返回分页列表

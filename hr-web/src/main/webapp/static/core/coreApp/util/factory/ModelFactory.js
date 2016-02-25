@@ -1,6 +1,12 @@
 /**
  * 模型工厂类
  */
+function getContextPath() {
+    var pathName = document.location.pathname;
+    var index = pathName.substr(1).indexOf("/");
+    var result = pathName.substr(0, index + 1);
+    return result;
+}
 Ext.define("factory.ModelFactory",{
 	statics:{
 		models:new Ext.util.MixedCollection(),
@@ -22,7 +28,8 @@ Ext.define("factory.ModelFactory",{
 					fields=this.fields.get(modelName);
 				}else{
 					Ext.Ajax.request({
-						url:'/pc/modelAction!getModelFields.action',
+						//url:'/pc/modelAction!getModelFields.action',
+						url : getContextPath()+ "/ModelFactory/getModelFields",
 						method:'POST',
 						params:params,
 						timeout:4000,
@@ -56,7 +63,8 @@ Ext.define("factory.ModelFactory",{
 				fields=this.fields.get(modelName);
 			}else{
 				Ext.Ajax.request({
-						url:'/pc/modelAction!getModelFields.action',
+						//url:'/pc/modelAction!getModelFields.action',
+						url : getContextPath()+ "/ModelFactory/getModelFields",
 						method:'POST',
 						params:params,
 						timeout:4000,

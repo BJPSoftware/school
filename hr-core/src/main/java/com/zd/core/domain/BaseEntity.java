@@ -1,4 +1,4 @@
-package com.zd.core.model;
+package com.zd.core.domain;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,13 +14,14 @@ import com.zd.core.annotation.FieldInfo;
 /**
  * 
  * <p>Project: Credo's Base</p>
- * <p>Description: </p>
+ * <p>Description: 实体基类,系统所有实体都需要继承的基类</p>
  * <p>Copyright (c) 2016 YmpcSoft.All Rights Reserved.</p>
  * @author <a href="autumnal_wind@yeah.net">LuoYiBo</a>
  */
 @MappedSuperclass
 public class BaseEntity implements Serializable{
-    private static final long serialVersionUID = 1L;
+    
+    private static final long serialVersionUID = 5941508938567597928L;
 
     @FieldInfo(name="创建时间")
     @Column(name = "CREATE_TIME", nullable = false, columnDefinition = "datetime", updatable = false)
@@ -49,6 +50,10 @@ public class BaseEntity implements Serializable{
     @Column(name="ISDELETE")
     private int isDelete=0;
 
+    @FieldInfo(name="排序字段")
+    @Column(name="ORDER_INDEX")
+    private Integer orderIndex;
+    
     public Date getCreateTime() {
         return createTime;
     }
@@ -96,6 +101,13 @@ public class BaseEntity implements Serializable{
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
     }
-    
+
+    public Integer getOrderIndex() {
+        return orderIndex;
+    }
+
+    public void setOrderIndex(Integer orderIndex) {
+        this.orderIndex = orderIndex;
+    }
     
 }

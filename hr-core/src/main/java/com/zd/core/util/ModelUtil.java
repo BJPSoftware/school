@@ -6,13 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import com.desktop.annotation.FieldInfo;
-//import com.desktop.annotation.NodeType;
-//import com.desktop.constant.TreeNodeType;
-//import com.desktop.model.extjs.JSONTreeNode;
-//import com.desktop.rbac.model.Department;
+import com.zd.core.annotation.FieldInfo;
+import com.zd.core.annotation.NodeType;
+import com.zd.core.constant.TreeNodeType;
+import com.zd.core.domain.extjs.JSONTreeNode;
 
-//import edu.emory.mathcs.backport.java.util.Collections;
+import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
  * 实体的工具类
@@ -37,6 +36,7 @@ public class ModelUtil {
             return false;
         }
     }
+
     /**
      * 得到类的属性集合
      * 
@@ -45,105 +45,113 @@ public class ModelUtil {
      *            是否是自身的字段
      * @return
      */
-    // public static Field[] getClassFields(Class<?> c, boolean itself){
-    // if(itself){
-    // if(modelFields.get(c.getName())!=null){
-    // return modelFields.get(c.getName());
-    // }else{
-    // Field[] fields=c.getDeclaredFields();
-    // modelFields.put(c.getName(), fields);
-    // return fields;
-    // }
-    // }else{
-    // if(modelFields.get(c.getName())!=null){
-    // return modelFields.get(c.getName());
-    // }else{
-    // List<Field> fields=new ArrayList<Field>();
-    // getAllDeclaredFields(c, fields);
-    // Field[] fies=new Field[fields.size()];
-    // fields.toArray(fies);
-    // modelFields.put(c.getName(), fies);
-    // return fies;
-    // }
-    // }
-    // }
+    public static Field[] getClassFields(Class<?> c, boolean itself) {
+        if (itself) {
+            if (modelFields.get(c.getName()) != null) {
+                return modelFields.get(c.getName());
+            } else {
+                Field[] fields = c.getDeclaredFields();
+                modelFields.put(c.getName(), fields);
+                return fields;
+            }
+        } else {
+            if (modelFields.get(c.getName()) != null) {
+                return modelFields.get(c.getName());
+            } else {
+                List<Field> fields = new ArrayList<Field>();
+                getAllDeclaredFields(c, fields);
+                Field[] fies = new Field[fields.size()];
+                fields.toArray(fies);
+                modelFields.put(c.getName(), fies);
+                return fies;
+            }
+        }
+    }
+
     /**
      * 从c类中取得全部字段,包括父类
      * 
      * @param c
      * @param fields
      */
-    // public static void getAllDeclaredFields(Class<?> c, List<Field> fields){
-    // Field[] fies=c.getDeclaredFields();
-    // Collections.addAll(fields, fies);
-    // Class<?> parent=c.getSuperclass();
-    // if(parent!=Object.class){
-    // getAllDeclaredFields(parent, fields);
-    // }else{
-    // return;
-    // }
-    // }
-    // public static String getClassPkName(Class<?> clazz){
-    // Field[] fields=getClassFields(clazz,false);
-    // String pkName="";
-    // for(Field f:fields){
-    // FieldInfo fieldInfo=f.getAnnotation(FieldInfo.class);
-    // if(fieldInfo.type().equals("ID")){
-    // pkName=f.getName();
-    // break;
-    // }
-    // }
-    // return pkName;
-    // }
+    public static void getAllDeclaredFields(Class<?> c, List<Field> fields) {
+        Field[] fies = c.getDeclaredFields();
+       Collections.addAll(fields, fies);
+        Class<?> parent = c.getSuperclass();
+        if (parent != Object.class) {
+            getAllDeclaredFields(parent, fields);
+        } else {
+            return;
+        }
+    }
+    /**
+     * 得到类的主键字段
+     * 
+     * @param clazz
+     * @return
+     */
+    public static String getClassPkName(Class<?> clazz) {
+        Field[] fields = getClassFields(clazz, false);
+        String pkName = "";
+        for (Field f : fields) {
+            FieldInfo fieldInfo = f.getAnnotation(FieldInfo.class);
+            if (fieldInfo.type().equals("ID")) {
+                pkName = f.getName();
+                break;
+            }
+        }
+        return pkName;
+    }
+
     /**
      * 得到树形字段的模版类
      * 
      * @param c
      * @return
      */
-    // public static JSONTreeNode getJSONTreeNodeTemplate(Class<?> c){
-    // Field[] fields=getClassFields(c, false);
-    // JSONTreeNode template=new JSONTreeNode();
-    // for(Field f:fields){
-    // NodeType nodeType=f.getAnnotation(NodeType.class);
-    // if(nodeType==null){
-    // continue;
-    // }
-    // if(TreeNodeType.ID.equalsType(nodeType.type())){
-    // template.setId(f.getName());
-    // }
-    // if(TreeNodeType.TEXT.equalsType(nodeType.type())){
-    // template.setText(f.getName());
-    // }
-    // if(TreeNodeType.CODE.equalsType(nodeType.type())){
-    // template.setCode(f.getName());
-    // }
-    // if(TreeNodeType.ICON.equals(nodeType.type())) {
-    // template.setIcon(f.getName());
-    // }
-    // if(TreeNodeType.NODEINFO.equals(nodeType.type())) {
-    // template.setNodeInfo(f.getName());
-    // }
-    // if(TreeNodeType.NODEINFOTYPE.equals(nodeType.type())) {
-    // template.setNodeInfoType(f.getName());
-    // }
-    // if(TreeNodeType.CLS.equals(nodeType.type())) {
-    // template.setCls(f.getName());
-    // }
-    // if(TreeNodeType.LEAF.equals(nodeType.type())) {
-    // // 根据NODETYPE
-    // template.setNodeType(f.getName());
-    // }
-    // if(TreeNodeType.PARENT.equals(nodeType.type())) {
-    // template.setParent(f.getName());
-    // }
-    // if(TreeNodeType.DISABLED.equals(nodeType.type())) {
-    // template.setHref(f.getName());
-    // }
-    // if(TreeNodeType.BIGICON.equals(nodeType.type())) {
-    // template.setBigIcon(f.getName());
-    // }
-    // }
-    // return template;
-    // }
+    public static JSONTreeNode getJSONTreeNodeTemplate(Class<?> c) {
+        Field[] fields = getClassFields(c, false);
+        JSONTreeNode template = new JSONTreeNode();
+        for (Field f : fields) {
+            NodeType nodeType = f.getAnnotation(NodeType.class);
+            if (nodeType == null) {
+                continue;
+            }
+            if (TreeNodeType.ID.equalsType(nodeType.type())) {
+                template.setId(f.getName());
+            }
+            if (TreeNodeType.TEXT.equalsType(nodeType.type())) {
+                template.setText(f.getName());
+            }
+            if (TreeNodeType.CODE.equalsType(nodeType.type())) {
+                template.setCode(f.getName());
+            }
+            if (TreeNodeType.ICON.equals(nodeType.type())) {
+                template.setIcon(f.getName());
+            }
+            if (TreeNodeType.NODEINFO.equals(nodeType.type())) {
+                template.setNodeInfo(f.getName());
+            }
+            if (TreeNodeType.NODEINFOTYPE.equals(nodeType.type())) {
+                template.setNodeInfoType(f.getName());
+            }
+            if (TreeNodeType.CLS.equals(nodeType.type())) {
+                template.setCls(f.getName());
+            }
+            if (TreeNodeType.LEAF.equals(nodeType.type())) {
+                // 根据NODETYPE
+                template.setNodeType(f.getName());
+            }
+            if (TreeNodeType.PARENT.equals(nodeType.type())) {
+                template.setParent(f.getName());
+            }
+            if (TreeNodeType.DISABLED.equals(nodeType.type())) {
+                template.setHref(f.getName());
+            }
+            if (TreeNodeType.BIGICON.equals(nodeType.type())) {
+                template.setBigIcon(f.getName());
+            }
+        }
+        return template;
+    }
 }

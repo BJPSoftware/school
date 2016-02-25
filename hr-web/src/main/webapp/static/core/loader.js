@@ -15,13 +15,13 @@ Ext.tip.QuickTipManager.init();
 Ext.Loader.setConfig({
 	enabled:true,
 	paths:{
-		baseUx: getContextPath() + "/static/core/ux/base"
-		//factory:getContextPath() + "/static/core/coreApp/util/factory"
+		baseUx: getContextPath() + "/static/core/ux/base",
+		factory:getContextPath() + "/static/core/coreApp/util/factory"
 	}
 })
 //同步加载
 Ext.syncRequire([
         "baseUx.form.datetime.DateTimePicker",
         "baseUx.form.datetime.DateTime",
-//        "factory.ModelFactory"
+        "factory.ModelFactory"
 ]);

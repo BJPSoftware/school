@@ -22,7 +22,7 @@ Ext.define("core.app.contoller.MainController",{
 		self.initForm();
 		self.initGrid();
 		self.initPanel();
-		//console.log(Ext.create(factory.ModelFactory.getModelByName("com.desktop.rbac.model.EndUser","userCode").modelName))
+		//console.log(Ext.create(factory.ModelFactory.getModelByName("com.zd.hr.domain.sys.SysDept","check").modelName))
 		//注册事件
 		this.control(self.ctr);
 	},

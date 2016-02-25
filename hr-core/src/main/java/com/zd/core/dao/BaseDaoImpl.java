@@ -607,4 +607,11 @@ public class BaseDaoImpl<E> implements BaseDao<E> {
             e.printStackTrace();
         }
     }
+
+    public List<E> doQuery(String sql) {
+        // TODO Auto-generated method stub
+        Query query = getSession().createSQLQuery(sql);
+        List<E> list = query.list();
+        return list;
+    }
 }
