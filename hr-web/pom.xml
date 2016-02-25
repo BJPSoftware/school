@@ -26,16 +26,6 @@
             <version>${spring.verson}</version>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-            <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-all</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <dependency>
             <groupId>com.zd</groupId>
             <artifactId>hr-core</artifactId>
             <version>${project.version}</version>
