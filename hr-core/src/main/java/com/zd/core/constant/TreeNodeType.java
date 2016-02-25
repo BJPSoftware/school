@@ -1,7 +1,7 @@
 package com.zd.core.constant;
 /**
  * 树形字段类型枚举
- * @author zhangshuaipeng
+ * @author luoyibo
  *
  */
 public enum TreeNodeType {

@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 
-import com.zd.core.controller.ExtJSBaseController;
+import com.zd.core.controller.BaseController;
+import com.zd.core.util.JsonBuilder;
 import com.zd.hr.domain.sys.SysUser;
 import com.zd.hr.service.sys.SysUserService;
 
 
 @Controller
 @RequestMapping("/login")
-public class LoginController extends ExtJSBaseController<SysUser> {
+public class LoginController extends BaseController<SysUser> {
     @Resource
     private SysUserService sysUserService;   
     
@@ -30,13 +31,15 @@ public class LoginController extends ExtJSBaseController<SysUser> {
         SysUser sysUser = sysUserService.getByProerties("userName", sysUserModel.getUserName());
         if (sysUser == null) { // 用户名有误或已被禁用
             result.put("result", -1);
-            writeJSON(response, result);
+            //writeJSON(response, result);
+            writeJSON(response, JsonBuilder.getInstance().returnSuccessJson(JsonBuilder.getInstance().toJson(result)));
             return;
         }
        
         if (!sysUser.getUserPwd().equals(new Sha256Hash(sysUserModel.getUserPwd()).toHex())) { // 密码错误
             result.put("result", -2);
-            writeJSON(response, result);
+            //writeJSON(response, result);
+            writeJSON(response, JsonBuilder.getInstance().returnSuccessJson(JsonBuilder.getInstance().toJson(result)));
             return;
         }
 //        sysUser.setLastLoginTime(new Date());
@@ -47,7 +50,8 @@ public class LoginController extends ExtJSBaseController<SysUser> {
 //        session.setAttribute(SESSION_SYS_USER, sysUser);
 //        session.setAttribute("ROLE_KEY", sysUser.getRoles().iterator().next().getRoleKey());
         result.put("result", 1);
-        writeJSON(response, result);
+        //writeJSON(response, result);
+        writeJSON(response, JsonBuilder.getInstance().returnSuccessJson(JsonBuilder.getInstance().toJson(result)));
     }
     @RequestMapping("/desktop")
     public String desktop(HttpServletRequest request, HttpServletResponse response) throws IOException {

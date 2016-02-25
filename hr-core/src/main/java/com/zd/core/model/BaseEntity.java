@@ -14,7 +14,7 @@ import com.zd.core.annotation.FieldInfo;
 /**
  * 
  * <p>Project: Credo's Base</p>
- * <p>Description: </p>
+ * <p>Description: 实体基类,系统所有实体都需要继承的基类</p>
  * <p>Copyright (c) 2016 YmpcSoft.All Rights Reserved.</p>
  * @author <a href="autumnal_wind@yeah.net">LuoYiBo</a>
  */
@@ -95,7 +95,5 @@ public class BaseEntity implements Serializable{
 
     public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
-    }
-    
-    
+    }       
 }
