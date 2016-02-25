@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import com.zd.core.domain.extjs.JSONTreeNode;
 import com.zd.core.support.BaseParameter;
 import com.zd.core.support.QueryResult;
 
@@ -288,4 +289,21 @@ public interface BaseService<E> {
 	 */
 	public QueryResult<E> doPaginationQuery(BaseParameter parameter, boolean bool);
 
+    /**
+     * 构建树形对象
+     * @param list
+     * @param rootId
+     * @return
+     */
+    public JSONTreeNode buildJSONTreeNode(List<JSONTreeNode> list,String rootId);
+    
+    /**
+     * 得到树形查询的集合
+     * @param rootId
+     * @param tableName
+     * @param whereSql
+     * @param template
+     * @return
+     */
+    public List<JSONTreeNode> getTreeList(String rootId,String tableName,String whereSql,JSONTreeNode template,Boolean expanded);
 }

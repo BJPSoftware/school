@@ -2,9 +2,13 @@ package com.zd.core.service;
 
 import com.zd.core.dao.BaseDao;
 import com.zd.core.dao.BaseDaoImpl;
+import com.zd.core.domain.extjs.JSONTreeNode;
 import com.zd.core.support.BaseParameter;
 import com.zd.core.support.QueryResult;
+import com.zd.core.util.StringUtils;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.springframework.transaction.annotation.Propagation;
@@ -185,4 +189,109 @@ public class BaseServiceImpl<E> implements BaseService<E> {
     public QueryResult<E> doPaginationQuery(BaseParameter parameter, boolean bool) {
         return this.dao.doPaginationQuery(parameter, bool);
     }
+
+    public JSONTreeNode buildJSONTreeNode(List<JSONTreeNode> list, String rootId) {
+        // TODO Auto-generated method stub
+        JSONTreeNode root=new JSONTreeNode();
+        for(JSONTreeNode node:list){
+            if(!(StringUtils.isNotEmpty(node.getParent()) && !node.getId().equals(rootId))){
+                root=node;
+                list.remove(node);
+                break;
+            }
+        }
+        createTreeChildren(list, root);
+        return root;
+    }
+    private void createTreeChildren(List<JSONTreeNode> childrens,JSONTreeNode root){
+        String parentId=root.getId();
+        for(int i=0;i<childrens.size();i++){
+            JSONTreeNode node=childrens.get(i);
+            if(StringUtils.isNotEmpty(node.getParent()) && node.getParent().equals(parentId)){
+                root.getChildren().add(node);
+                createTreeChildren(childrens, node);
+            }
+            if(i==childrens.size()-1){
+                if(root.getChildren().size()<1){
+                    root.setLeaf(true);
+                }
+                return;
+            }
+        }
+    }
+
+    public List<JSONTreeNode> getTreeList(String rootId, String tableName, String whereSql, JSONTreeNode template,
+            Boolean expanded) {
+        // TODO Auto-generated method stub
+        List<JSONTreeNode> chilrens=new ArrayList()<JSONTreeNode>();
+        StringBuffer sql=new StringBuffer("select ");
+        sql.append("t."+template.getId()+",");
+        sql.append("t."+template.getText()+",");
+        sql.append("t."+template.getCode()+",");
+        sql.append("t."+template.getNodeType()+",");
+        sql.append("t."+template.getNodeInfo()+",");
+        sql.append("t."+template.getNodeInfoType()+",");
+        sql.append("t."+template.getParent()+",");
+        sql.append("t.orderIndex ");
+        if(StringUtils.isNotEmpty(template.getIcon())){
+            sql.append(",t."+template.getIcon());
+        }
+        if(StringUtils.isNotEmpty(template.getHref())){
+            sql.append(",t."+template.getHref());
+        }
+        if(StringUtils.isNotEmpty(template.getBigIcon())){
+            sql.append(",t."+template.getBigIcon());
+        }
+        sql.append(" from "+tableName+" t where 1=1");
+        if(StringUtils.isNotEmpty(whereSql)){
+            sql.append(whereSql);
+        }
+        sql.append(" start with t."+template.getId()+"='"+rootId+"' CONNECT BY t."+template.getParent()+"= PRIOR t."+template.getId()+" ");
+        sql.append(" order by t."+template.getParent()+",t.orderIndex");
+        List<?> alist=this.dao.doQuery(sql.toString());
+        for(int i=0;i<alist.size();i++){
+            Object[] obj=(Object[]) alist.get(i);
+            JSONTreeNode node=new JSONTreeNode();
+            node.setId((String)obj[0]);
+            node.setText((String)obj[1]);
+            node.setCode((String)obj[2]);
+            if(com.zd.core.constant.NodeType.LEAF.equalsIgnoreCase((String)obj[3])){
+                node.setLeaf(true);
+            }else{
+                node.setLeaf(false);
+            }
+            node.setNodeInfo((String)obj[4]);
+            node.setNodeInfoType((String)obj[5]);
+            node.setParent((String)obj[6]);
+            if(StringUtils.isNotEmpty((obj[7])+"")){
+                node.setOrderIndex(Integer.parseInt(obj[7]+""));
+            }
+            if(StringUtils.isNotEmpty(template.getIcon())){
+                node.setIcon((String)obj[8]);
+                if(StringUtils.isNotEmpty(template.getHref())){
+                    node.setDisabled(Boolean.parseBoolean(obj[9].toString()));
+                    if(StringUtils.isNotEmpty(template.getBigIcon())){
+                        node.setBigIcon((String)obj[10]);
+                    }
+                }else if(StringUtils.isNotEmpty(template.getBigIcon())){
+                    node.setBigIcon((String)obj[9]);
+                }
+            }else{
+                if(StringUtils.isNotEmpty(template.getIcon())){
+                    node.setDisabled(Boolean.parseBoolean(obj[8].toString()));
+                    if(StringUtils.isNotEmpty(template.getBigIcon())){
+                        node.setBigIcon((String)obj[9]);
+                    }
+                }else if(StringUtils.isNotEmpty(template.getBigIcon())){
+                    node.setBigIcon((String)obj[8]);
+                }
+            }
+            if(expanded!=null){
+                node.setExpanded(expanded);
+            }
+            chilrens.add(node);         
+        }
+        return chilrens;
+    }    
+
 }
