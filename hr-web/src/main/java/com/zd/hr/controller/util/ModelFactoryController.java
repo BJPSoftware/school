@@ -33,8 +33,13 @@ public class ModelFactoryController extends BaseController<SysLog>{
         } else {
             strData=ModelUtil.modelJson.get(modelName);
         }
-        Map<String, Object> result = new HashMap<String, Object>();
-        result.put("result", 1);
         writeJSON(response, strData);
     }
+
+    @Override
+    public SysLog getModel() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+ 
 }

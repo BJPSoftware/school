@@ -2,6 +2,7 @@ package com.zd.hr.test.sys;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,13 +29,14 @@ public class SysUserTest {
 
     @Test
     public final void testUserSave() {
-        SysUser sysUser = new SysUser();
-        sysUser.setUserName("admin");
-        sysUser.setUserPwd("92925488b28ab12584ac8fcaa8a27a0f497b2c62940c8f4fbc8ef19ebc87c43e");
-        sysUser.setUserStatu(0);
-        sysUser.setUserCh("超级管理员");
-
-        sysUserService.persist(sysUser);
+//        SysUser sysUser = new SysUser();
+//        sysUser.setUserName("admin");
+//        //new Sha256Hash(sysUserModel.getUserPwd()).toHex()
+//        sysUser.setUserPwd(new Sha256Hash("888888").toHex());
+//        sysUser.setUserStatu(0);
+//        sysUser.setUserCh("超级管理员");
+//
+//        sysUserService.persist(sysUser);
 
     }
 }

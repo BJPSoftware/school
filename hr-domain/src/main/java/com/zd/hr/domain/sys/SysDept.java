@@ -54,6 +54,7 @@ public class SysDept extends TreeBaseEntity {
      */
     @JsonIgnore
     @ManyToOne(optional=true,fetch=FetchType.LAZY)
+    @NodeType(type=TreeNodeType.PARENT)
     @JoinColumn(name="PARENT_DEPT")
     private SysDept parentDept;
     

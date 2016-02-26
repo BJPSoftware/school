@@ -1,6 +1,6 @@
 Ext.define("core.rbac.system.store.UserStore",{
 	extend:"Ext.data.Store",
-	//model:factory.ModelFactory.getModelByName("com.desktop.rbac.model.EndUser","checked").modelName,
+	model:factory.ModelFactory.getModelByName("com.zd.hr.domain.sys.SysUser","checked").modelName,
 	proxy:{
 		type:"ajax",
 		//url:"/rbac/userAction!load.action",

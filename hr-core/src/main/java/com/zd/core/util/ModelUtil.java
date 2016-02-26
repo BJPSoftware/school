@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Table;
+
 import com.zd.core.annotation.FieldInfo;
 import com.zd.core.annotation.NodeType;
 import com.zd.core.constant.TreeNodeType;
@@ -36,7 +38,49 @@ public class ModelUtil {
             return false;
         }
     }
-
+    /**
+     * 获取实体对应的数据表名
+     * equalEntity=true时返回实体的名称，否则返回注解的表名
+     * @param clazz
+     * @param equalEntity
+     * @return
+     */
+    public static String getTableName(Class<?> clazz, boolean equalEntity){
+        
+        String tableName = clazz.getSimpleName();
+        
+        if(!equalEntity){
+            Table annotation = (Table)clazz.getAnnotation(Table.class);
+            if (!StringUtils.isEmpty(annotation.name())){
+                tableName = annotation.name();
+            } 
+        }        
+        return tableName;
+    }
+    
+    public static Field[] getTableColumns(Class<?> c,boolean itself){
+        if (itself) {
+            if (modelFields.get(c.getName()) != null) {
+                return modelFields.get(c.getName());
+            } else {
+                Field[] fields = c.getDeclaredFields();
+                modelFields.put(c.getName(), fields);
+                return fields;
+            }
+        } else {
+            if (modelFields.get(c.getName()) != null) {
+                return modelFields.get(c.getName());
+            } else {
+                List<Field> fields = new ArrayList<Field>();
+                getAllDeclaredFields(c, fields);
+                Field[] fies = new Field[fields.size()];
+                fields.toArray(fies);
+                modelFields.put(c.getName(), fies);
+                return fies;
+            }
+        }        
+    }
+    
     /**
      * 得到类的属性集合
      * 
@@ -84,6 +128,7 @@ public class ModelUtil {
             return;
         }
     }
+    
     /**
      * 得到类的主键字段
      * 

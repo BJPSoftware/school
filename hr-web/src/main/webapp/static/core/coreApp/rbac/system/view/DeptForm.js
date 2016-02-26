@@ -27,6 +27,11 @@ Ext.define("core.rbac.system.view.DeptForm",{
 				fieldLabel:"排序",
 				name:"orderIndex"
 			},{
+				xtype:"textfield",
+				fieldLabel:"父节点",
+				name:"parentId",
+				hidden:true
+			},{
 				xtype:"button",
 				ref:"submit",
 				text:"保存"

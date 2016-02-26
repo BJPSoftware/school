@@ -16,7 +16,7 @@ Ext.define('MyDesktop.App', {
 
     requires: [
         'Ext.window.MessageBox',
-		'Ext.ux.desktop.Module',
+        'Ext.ux.desktop.Module',
         'Ext.ux.desktop.ShortcutModel',
         'MyDesktop.Settings'
     ],
@@ -29,28 +29,42 @@ Ext.define('MyDesktop.App', {
         // now ready...
     },
 
-    getModules : function(){
+    getModules: function() {
         return [
-        
+
         ];
     },
 
-    getDesktopConfig: function () {
-        var me = this, ret = me.callParent();
+    getDesktopConfig: function() {
+        var me = this,
+            ret = me.callParent();
 
         return Ext.apply(ret, {
             //cls: 'ux-desktop-black',
 
-            contextMenuItems: [
-                { text: '更改背景', handler: me.onSettings, scope: me }
-            ],
+            contextMenuItems: [{
+                text: '更改背景',
+                handler: me.onSettings,
+                scope: me
+            }],
 
             shortcuts: Ext.create('Ext.data.Store', {
                 model: 'Ext.ux.desktop.ShortcutModel',
-                data: [
-                    { name: '角色管理', iconCls: 'customers',viewIconCls:"icon_customers",xtype:"testpanel",controller:"core.test.controller.TestController",module:"testmainview"},
-                    { name: '用户管理', iconCls: 'customers',viewIconCls:"icon_customers",xtype:"rbac.mainlayout",controller:"core.rbac.system.controller.DeptUserController",module:"deptusermainview"}
-                ]
+                data: [{
+                    name: '角色管理',
+                    iconCls: 'customers',
+                    viewIconCls: "icon_customers",
+                    xtype: "testpanel",
+                    controller: "core.test.controller.TestController",
+                    module: "testmainview"
+                }, {
+                    name: '用户管理',
+                    iconCls: 'customers',
+                    viewIconCls: "icon_customers",
+                    xtype: "rbac.mainlayout",
+                    controller: "core.rbac.user.controller.DeptUserController",
+                    module: "deptusermainview"
+                }]
             }),
 
             wallpaper: getContextPath() + '/static/MyDesktop/wallpapers/Blue-Sencha.jpg',
@@ -59,8 +73,9 @@ Ext.define('MyDesktop.App', {
     },
 
     // config for the start menu
-    getStartConfig : function() {
-        var me = this, ret = me.callParent();
+    getStartConfig: function() {
+        var me = this,
+            ret = me.callParent();
 
         return Ext.apply(ret, {
             title: '系统',
@@ -68,17 +83,15 @@ Ext.define('MyDesktop.App', {
             height: 300,
             toolConfig: {
                 width: 100,
-                items: [
-                    {
-                        text:'更改背景',
-                        iconCls:'settings',
+                items: [{
+                        text: '更改背景',
+                        iconCls: 'settings',
                         handler: me.onSettings,
                         scope: me
                     },
-                    '-',
-                    {
-                        text:'退出系统',
-                        iconCls:'logout',
+                    '-', {
+                        text: '退出系统',
+                        iconCls: 'logout',
                         handler: me.onLogout,
                         scope: me
                     }
@@ -87,25 +100,26 @@ Ext.define('MyDesktop.App', {
         });
     },
 
-    getTaskbarConfig: function () {
+    getTaskbarConfig: function() {
         var ret = this.callParent();
 
         return Ext.apply(ret, {
             quickStart: [
-//                { name: 'Accordion Window', iconCls: 'accordion', module: 'acc-win' },
-//                { name: 'Grid Window', iconCls: 'icon-grid', module: 'grid-win' }
+                //                { name: 'Accordion Window', iconCls: 'accordion', module: 'acc-win' },
+                //                { name: 'Grid Window', iconCls: 'icon-grid', module: 'grid-win' }
             ],
-            trayItems: [
-                { xtype: 'trayclock', flex: 1 }
-            ]
+            trayItems: [{
+                xtype: 'trayclock',
+                flex: 1
+            }]
         });
     },
 
-    onLogout: function () {
+    onLogout: function() {
         Ext.Msg.confirm('退出系统', '你是否要退出系统呢?');
     },
 
-    onSettings: function () {
+    onSettings: function() {
         var dlg = new MyDesktop.Settings({
             desktop: this.desktop
         });

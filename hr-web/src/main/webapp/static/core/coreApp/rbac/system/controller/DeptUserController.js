@@ -2,7 +2,10 @@ Ext.define("core.rbac.system.controller.DeptUserController",{
 	extend:"Ext.app.Controller",
 	mixins: {
 		suppleUtil:"core.util.SuppleUtil",
-		messageUtil:"core.util.MessageUtil"
+		messageUtil:"core.util.MessageUtil",
+		formUtil:"core.util.FormUtil",
+		treeUtil:"core.util.TreeUtil",
+		gridActionUtil:"core.util.GridActionUtil"
 	},
 	init:function(){
 		var self=this
@@ -110,7 +113,7 @@ Ext.define("core.rbac.system.controller.DeptUserController",{
 		"core.rbac.system.view.UserGrid"
 	],
 	stores:[
-		"core.rbac.system.store.DeptStore",
-		"core.rbac.system.store.UserStore"
+		//"core.rbac.system.store.DeptStore",
+		//"core.rbac.system.store.UserStore"
 	]
 });

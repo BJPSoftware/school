@@ -22,7 +22,7 @@ Ext.define("core.rbac.system.view.DeptTree",{
 	    	fields.each(function(field){
 	    		field.setValue(null);
 	    	});
-	    	
+	    	tree.getSelectionModel().deselectAll(true);
 	   	 }
 	}],
 	rbar:[{
