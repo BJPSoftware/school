@@ -1,5 +1,7 @@
 com\zd\hr\service\sys\Impl\SysRoleServiceImpl.class
+com\zd\hr\service\sys\SysDeptService.class
 com\zd\hr\service\sys\SysRoleService.class
+com\zd\hr\service\sys\Impl\SysDeptServiceImpl.class
 com\zd\hr\service\sys\Impl\SysUserServiceImpl.class
 com\zd\hr\service\sys\SysLogService.class
 com\zd\hr\service\sys\Impl\SysLogServiceImpl.class

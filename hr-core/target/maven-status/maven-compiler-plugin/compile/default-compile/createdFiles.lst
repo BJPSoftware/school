@@ -69,6 +69,5 @@ com\zd\core\app\logic\LogicExecuteWorkerEngine.class
 com\zd\core\util\MD5.class
 com\zd\core\service\BaseService.class
 com\zd\core\support\BaseParameter.class
-com\zd\core\model\BaseEntity.class
 com\zd\core\support\ListView.class
 com\zd\core\app\bean\BaseResponseBean.class

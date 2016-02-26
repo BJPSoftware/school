@@ -1,6 +1,8 @@
 com\zd\hr\dao\sys\SysRoleDao.class
+com\zd\hr\dao\sys\Impl\SysDeptDaoImpl.class
 com\zd\hr\dao\sys\SysLogDao.class
 com\zd\hr\dao\sys\Impl\SysLogDaoImpl.class
 com\zd\hr\dao\sys\Impl\SysRoleDaoImpl.class
+com\zd\hr\dao\sys\SysDeptDao.class
 com\zd\hr\dao\sys\Impl\SysUserDaoImpl.class
 com\zd\hr\dao\sys\SysUserDao.class
