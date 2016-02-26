@@ -27,6 +27,7 @@ import edu.emory.mathcs.backport.java.util.Collections;
  */
 public class ModelUtil {
     public static Map<String, Field[]> modelFields = new HashMap<String, Field[]>();
+    
     public static Map<String, String> modelJson = new HashMap<String, String>();
 
     /**
@@ -50,7 +51,6 @@ public class ModelUtil {
      * @return
      */
     public static String getTableName(Class<?> clazz, boolean equalEntity){
-        
         String tableName = clazz.getSimpleName();
         
         if(!equalEntity){

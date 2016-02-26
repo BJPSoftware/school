@@ -47,10 +47,12 @@ public class LoginController extends BaseController<SysUser> {
         result.put("result", 1);
         writeJSON(response, result);
     }
+    
     @RequestMapping("/desktop")
     public String desktop(HttpServletRequest request, HttpServletResponse response) throws IOException {
         return "index";
     }
+    
     @Override
     public SysUser getModel() {
         // TODO Auto-generated method stub
