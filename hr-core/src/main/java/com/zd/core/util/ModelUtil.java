@@ -1,13 +1,17 @@
 package com.zd.core.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.util.Annotations;
 import com.zd.core.annotation.FieldInfo;
 import com.zd.core.annotation.NodeType;
 import com.zd.core.constant.TreeNodeType;
@@ -58,27 +62,37 @@ public class ModelUtil {
         return tableName;
     }
     
-    public static Field[] getTableColumns(Class<?> c,boolean itself){
-        if (itself) {
-            if (modelFields.get(c.getName()) != null) {
-                return modelFields.get(c.getName());
-            } else {
-                Field[] fields = c.getDeclaredFields();
-                modelFields.put(c.getName(), fields);
-                return fields;
+    /**
+     * 获取指定字段映射的数据表的列名
+     * 默认是取字段名
+     * isAnnotation=true表示取字段使用@Column进行注解的名称，当没有注解时取字段名
+     * @param f
+     * @param isAnnotation
+     * @return
+     */
+    public static String getColumnName(Field f,boolean isAnnotation){
+        String columnName = f.getName();
+        if(isAnnotation){
+            Annotation[] annotations = f.getAnnotations();
+            for(int i=0; i<annotations.length; i++){
+                if(annotations[i] instanceof Column){
+                    //数据列
+                    Column column = (Column) annotations[i];
+                    if(StringUtils.isNotEmpty(column.name())){
+                        columnName = column.name();
+                    }
+                } else if (annotations[i] instanceof JoinColumn){
+                    //关联列
+                    JoinColumn joinColumn = (JoinColumn) annotations[i];
+                    if(StringUtils.isNotEmpty(joinColumn.name())){
+                        columnName = joinColumn.name();
+                    }                    
+                }
+                
             }
-        } else {
-            if (modelFields.get(c.getName()) != null) {
-                return modelFields.get(c.getName());
-            } else {
-                List<Field> fields = new ArrayList<Field>();
-                getAllDeclaredFields(c, fields);
-                Field[] fies = new Field[fields.size()];
-                fields.toArray(fies);
-                modelFields.put(c.getName(), fies);
-                return fies;
-            }
-        }        
+        }
+        
+        return columnName;
     }
     
     /**
@@ -162,39 +176,40 @@ public class ModelUtil {
             if (nodeType == null) {
                 continue;
             }
+            
             if (TreeNodeType.ID.equalsType(nodeType.type())) {
-                template.setId(f.getName());
+                template.setId(getColumnName(f, true));
             }
             if (TreeNodeType.TEXT.equalsType(nodeType.type())) {
-                template.setText(f.getName());
+                template.setText(getColumnName(f, true));
             }
             if (TreeNodeType.CODE.equalsType(nodeType.type())) {
-                template.setCode(f.getName());
+                template.setCode(getColumnName(f, true));
             }
             if (TreeNodeType.ICON.equals(nodeType.type())) {
-                template.setIcon(f.getName());
+                template.setIcon(getColumnName(f, true));
             }
             if (TreeNodeType.NODEINFO.equals(nodeType.type())) {
-                template.setNodeInfo(f.getName());
+                template.setNodeInfo(getColumnName(f, true));
             }
             if (TreeNodeType.NODEINFOTYPE.equals(nodeType.type())) {
-                template.setNodeInfoType(f.getName());
+                template.setNodeInfoType(getColumnName(f, true));
             }
             if (TreeNodeType.CLS.equals(nodeType.type())) {
-                template.setCls(f.getName());
+                template.setCls(getColumnName(f, true));
             }
             if (TreeNodeType.LEAF.equals(nodeType.type())) {
                 // 根据NODETYPE
-                template.setNodeType(f.getName());
+                template.setNodeType(getColumnName(f, true));
             }
             if (TreeNodeType.PARENT.equals(nodeType.type())) {
-                template.setParent(f.getName());
+                template.setParent(getColumnName(f, true));
             }
             if (TreeNodeType.DISABLED.equals(nodeType.type())) {
-                template.setHref(f.getName());
+                template.setHref(getColumnName(f, true));
             }
             if (TreeNodeType.BIGICON.equals(nodeType.type())) {
-                template.setBigIcon(f.getName());
+                template.setBigIcon(getColumnName(f, true));
             }
         }
         return template;

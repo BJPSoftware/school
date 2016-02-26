@@ -233,7 +233,7 @@ public class BaseServiceImpl<E> implements BaseService<E> {
         filedSql.append("[" + template.getNodeInfo() + "],");
         filedSql.append("[" + template.getNodeInfoType() + "],");
         filedSql.append("[" + template.getParent() + "],");
-        filedSql.append("[OrderIndex]");
+        filedSql.append("[ORDER_INDEX]");
         if (StringUtils.isNotEmpty(template.getIcon())) {
             filedSql.append(",[" + template.getIcon() + "]");
         }
@@ -257,7 +257,7 @@ public class BaseServiceImpl<E> implements BaseService<E> {
         if (StringUtils.isNotEmpty(whereSql)) {
             sql.append(whereSql);
         }
-        sql.append(" ORDER BY [" + template.getParent() + "] asc, [orderIndex] asc ");
+        sql.append(" ORDER BY [" + template.getParent() + "] asc, [ORDER_INDEX] asc ");
 
         List<?> alist = this.dao.doQuery(sql.toString());
         for (int i = 0; i < alist.size(); i++) {

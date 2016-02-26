@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.zd.core.annotation.FieldInfo;
-import com.zd.core.support.ExtJSBaseParameter;;
+import com.zd.core.domain.BaseEntity;
 
 /**
  * 系统用户实体类
@@ -18,7 +18,7 @@ import com.zd.core.support.ExtJSBaseParameter;;
  */
 @Entity
 @Table(name = "HR_SYS_USER")
-public class SysUser extends ExtJSBaseParameter {
+public class SysUser extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Id

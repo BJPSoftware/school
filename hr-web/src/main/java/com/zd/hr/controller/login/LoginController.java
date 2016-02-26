@@ -3,24 +3,22 @@ package com.zd.hr.controller.login;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 
-import com.zd.core.controller.ExtJSBaseController;
+import com.zd.core.controller.BaseController;
 import com.zd.hr.domain.sys.SysUser;
 import com.zd.hr.service.sys.SysUserService;
 
 
 @Controller
 @RequestMapping("/login")
-public class LoginController extends ExtJSBaseController<SysUser> {
+public class LoginController extends BaseController<SysUser> {
     @Resource
     private SysUserService sysUserService;   
     
@@ -28,7 +26,7 @@ public class LoginController extends ExtJSBaseController<SysUser> {
     public void login (SysUser sysUserModel, HttpServletRequest request, HttpServletResponse response) throws Exception{
         Map<String, Object> result = new HashMap<String, Object>();
         SysUser sysUser = sysUserService.getByProerties("userName", sysUserModel.getUserName());
-        if (sysUser == null) { // 用户名有误或已被禁用
+        if (sysUser == null||1==sysUser.getUserStatu()) { // 用户名有误或已被禁用
             result.put("result", -1);
             writeJSON(response, result);
             return;
@@ -52,5 +50,10 @@ public class LoginController extends ExtJSBaseController<SysUser> {
     @RequestMapping("/desktop")
     public String desktop(HttpServletRequest request, HttpServletResponse response) throws IOException {
         return "index";
+    }
+    @Override
+    public SysUser getModel() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
