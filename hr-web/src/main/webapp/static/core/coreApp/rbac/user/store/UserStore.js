@@ -3,7 +3,7 @@ Ext.define("core.rbac.user.store.UserStore",{
 	model:factory.ModelFactory.getModelByName("com.zd.hr.domain.sys.SysUser","checked").modelName,
 	proxy:{
 		type:"ajax",
-		url:"/rbac/userAction!load.action",
+		url:"/sysuser/",
 		extraParams :{whereSql: " and deptId in('ROOT')"},
 		reader:{
 			type:"json",
