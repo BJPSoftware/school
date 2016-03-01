@@ -23,5 +23,5 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser> implements SysU
     @Resource
     public void setSysUserDao(SysUserDao sysUserDao) {
         this.dao = sysUserDao;
-    }
+    }   
 }

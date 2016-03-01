@@ -24,24 +24,25 @@ public class SysUser extends BaseEntity {
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid")
     @GeneratedValue(generator = "uuid")
+    @FieldInfo(name="主键",type="ID")
     @Column(name = "USER_ID")
     private String userId;
 
     @FieldInfo(name="用户名")
-    @Column(name = "USER_NAME", length = 32, nullable = false)
+    @Column(name = "USER_NAME", length = 32)
     private String userName;
 
     @FieldInfo(name="用户密码")
-    @Column(name = "USER_PWD", length = 128, nullable = false)
+    @Column(name = "USER_PWD", length = 128)
     private String userPwd;
 
     @FieldInfo(name="用户姓名")
-    @Column(name = "USER_CH", length = 32, nullable = true)
+    @Column(name = "USER_CH", length = 32)
     private String userCh;
     
     @FieldInfo(name="用户状态")
     @Column(name="USER_STATU", columnDefinition="int")
-    private int userStatu; 
+    private Integer userStatu; 
    
     @FieldInfo(name="部门ID")
     @Column (name="DEPT_ID")
@@ -91,7 +92,7 @@ public class SysUser extends BaseEntity {
         return userStatu;
     }
 
-    public void setUserStatu(int userStatu) {
+    public void setUserStatu(Integer userStatu) {
         this.userStatu = userStatu;
     }
 

@@ -17,6 +17,8 @@
   <link rel="stylesheet" type="text/css" href="${contextPath}/static/core/css/comm.css" />
   <script type="text/javascript" src="${contextPath}/static/ext/ext-all-debug.js"></script>
   <script type="text/javascript" src="${contextPath}/static/ext/locale/ext-locale-zh_CN.js"></script>
+  <script type="text/javascript" src="${contextPath}/static/ext/examples/shared/examples.js"></script>
+  <script type="text/javascript" src="${contextPath}/static/core/coreApp/util/overrideUtil.js"></script>
   <script type="text/javascript" src="${contextPath}/static/core/coreApp/util/comm.js"></script>
   <script type="text/javascript" src="${contextPath}/static/core/loader.js"></script>
   <script type="text/javascript" src="${contextPath}/static/core/app.js"></script>

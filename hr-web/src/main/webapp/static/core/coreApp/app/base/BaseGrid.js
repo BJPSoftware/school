@@ -18,8 +18,8 @@ Ext.define("core.app.base.BaseGrid",{
 	enableKeyNav:true,  //可以使用键盘控制上下
 	columnLines:true, //展示竖线
 	initComponent:function(){
-		this.editing = Ext.create('Ext.grid.plugin.CellEditing',{clicksToEdit:1});
-		this.plugins = [this.editing];
+		// this.editing = Ext.create('Ext.grid.plugin.CellEditing',{clicksToEdit:1});
+//		this.plugins = [this.editing];
 		this.callParent(arguments);
 	}
 });

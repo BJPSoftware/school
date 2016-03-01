@@ -11,7 +11,6 @@ import com.zd.hr.service.sys.SysLogService;
 
 @Service
 public class SysLogServiceImpl extends BaseServiceImpl<SysLog> implements SysLogService{
-
     @Resource
     public void setSysLogDao(SysLogDao sysLogDao) {
         this.dao = sysLogDao;

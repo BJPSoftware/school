@@ -154,9 +154,11 @@ public class ModelUtil {
         String pkName = "";
         for (Field f : fields) {
             FieldInfo fieldInfo = f.getAnnotation(FieldInfo.class);
-            if (fieldInfo.type().equals("ID")) {
+            if(isNotNull(fieldInfo)){
+                if("ID".equals(fieldInfo.type())){
                 pkName = f.getName();
                 break;
+                }
             }
         }
         return pkName;

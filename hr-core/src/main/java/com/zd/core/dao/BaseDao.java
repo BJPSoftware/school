@@ -294,4 +294,38 @@ public interface BaseDao<E> {
 	 */
 	public QueryResult<E> doPaginationQuery(BaseParameter parameter, boolean bool);
 
+    public List<E> queryByHql(String hql,Integer start,Integer limit);
+    
+    /**
+     * 根据HQL查询条件查询总记录
+     * @param whereSql
+     * @return
+     */
+    public Integer getCount(String hql);  
+    
+    /**
+     * 执行hql语句
+     * @param hql
+     * @return
+     */
+    public int executeHql(String hql);
+    
+    /**
+     * 判断字段的值是否存在 如果是插入id赋值-1或者new Guid,如果是修改id赋值 要修改项的值
+     * @param fieldName 要判断的字段
+     * @param fieldValue 要判断的字段的值
+     * @param id 实体的标识
+     * @param where 附加查询条件
+     * @return
+     */
+    public boolean IsFieldExist( String fieldName, String fieldValue, String id, String where );
+    
+    /**
+     * 判断字段的值是否存在 如果是插入id赋值-1或者new Guid,如果是修改id赋值 要修改项的值
+     * @param fieldName 要判断的字段
+     * @param fieldValue 要判断的字段的值
+     * @param id 实体的标识
+     * @return
+     */
+    public boolean IsFieldExist( String fieldName, String fieldValue, String id );
 }

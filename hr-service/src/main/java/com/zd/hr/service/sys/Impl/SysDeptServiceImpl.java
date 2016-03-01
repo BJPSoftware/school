@@ -14,7 +14,7 @@ import com.zd.hr.service.sys.SysDeptService;
 public class SysDeptServiceImpl extends BaseServiceImpl<SysDept> implements SysDeptService{
 
     @Resource
-    public void setSysLogDao(SysDeptDao sysLogDao) {
-        this.dao = sysLogDao;
+    public void setSysDeptDao(SysDeptDao sysDeptDao) {
+        this.dao = sysDeptDao;
     }
 }

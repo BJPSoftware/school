@@ -11,7 +11,6 @@ import com.zd.hr.service.sys.SysRoleService;
 
 @Service
 public class SysRoleServiceImpl extends BaseServiceImpl<SysRole> implements SysRoleService{
-
     @Resource
     public void setSysRoleDao(SysRoleDao sysRoleDao) {
         this.dao = sysRoleDao;

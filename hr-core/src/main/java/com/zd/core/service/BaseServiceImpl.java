@@ -2,9 +2,11 @@ package com.zd.core.service;
 
 import com.zd.core.dao.BaseDao;
 import com.zd.core.dao.BaseDaoImpl;
+import com.zd.core.domain.BaseEntity;
 import com.zd.core.domain.extjs.JSONTreeNode;
 import com.zd.core.support.BaseParameter;
 import com.zd.core.support.QueryResult;
+import com.zd.core.util.EntityUtil;
 import com.zd.core.util.StringUtils;
 
 import java.io.Serializable;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class BaseServiceImpl<E> implements BaseService<E> {
     protected BaseDao<E> dao;
+    protected Class<E> entityClass;
 
     public void persist(E entity) {
         this.dao.persist(entity);
@@ -305,4 +308,42 @@ public class BaseServiceImpl<E> implements BaseService<E> {
         return chilrens;
     }
 
+    public List<E> queryByHql(String hql, Integer start, Integer limit) {
+        // TODO Auto-generated method stub
+        return this.dao.queryByHql(hql, start, limit);
+    }
+
+    public Integer getCount(String hql) {
+        // TODO Auto-generated method stub
+        return this.dao.getCount(hql);
+    }
+
+    public void executeBatchHql(String[] updateSqls) {
+        // TODO Auto-generated method stub
+        for(String sql:updateSqls){
+            this.dao.executeHql(sql);
+        }        
+    }
+
+    public Integer getDefaultOrderIndex(E entity) {
+        // TODO Auto-generated method stub
+        Integer defaultOrderIndex = Integer.valueOf(0);
+        String className = entity.getClass().getSimpleName();
+        String hql = " from  " + className + " where orderIndex=(select max(orderIndex) from " + className +")";
+        List<E> list= this.dao.queryByHql(hql, 0, 0);
+
+        defaultOrderIndex = (Integer) EntityUtil.getPropertyValue(list.get(0), "orderIndex") +1;
+        
+        return defaultOrderIndex; 
+    }
+
+    public boolean IsFieldExist(String fieldName, String fieldValue, String id, String where) {
+        // TODO Auto-generated method stub
+        return this.dao.IsFieldExist(fieldName, fieldValue, id, where);
+    }
+
+    public boolean IsFieldExist(String fieldName, String fieldValue, String id) {
+        // TODO Auto-generated method stub
+        return IsFieldExist(fieldName, fieldValue, id, null);
+    }
 }

@@ -1,3 +1,5 @@
 com\zd\hr\controller\sys\SysDeptController.class
+com\zd\hr\controller\login\LoginController.class
+com\zd\hr\controller\sys\SysUserController.class
 com\zd\hr\controller\util\ModelFactoryController.class
 com\zd\hr\controller\sys\SysRoleController.class

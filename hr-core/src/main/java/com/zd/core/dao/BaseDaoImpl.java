@@ -25,6 +25,8 @@ import org.hibernate.criterion.Restrictions;
 
 import com.zd.core.support.BaseParameter;
 import com.zd.core.support.QueryResult;
+import com.zd.core.util.ModelUtil;
+import com.zd.core.util.StringUtils;
 
 
 public class BaseDaoImpl<E> implements BaseDao<E> {
@@ -32,7 +34,7 @@ public class BaseDaoImpl<E> implements BaseDao<E> {
 
     private static Map<String, Method> MAP_METHOD = new HashMap();
     private SessionFactory sessionFactory;
-    protected Class<E> entityClass;
+    public Class<E> entityClass;
 
     public SessionFactory getSessionFactory() {
         return this.sessionFactory;
@@ -49,6 +51,14 @@ public class BaseDaoImpl<E> implements BaseDao<E> {
     @Resource(name = "sessionFactory")
     public void setSF(SessionFactory sessionFactory) {
         setSessionFactory(sessionFactory);
+    }
+
+    public Class<E> getEntityClass() {
+        return entityClass;
+    }
+
+    public void setEntityClass(Class<E> entityClass) {
+        this.entityClass = entityClass;
     }
 
     public BaseDaoImpl(Class<E> entityClass) {
@@ -614,4 +624,51 @@ public class BaseDaoImpl<E> implements BaseDao<E> {
         List<E> list = query.list();
         return list;
     }
+
+    public List<E> queryByHql(String hql, Integer start, Integer limit) {
+        // TODO Auto-generated method stub
+        Query query=getSession().createQuery(hql);
+        if(limit>0){
+            query.setFirstResult(start);
+            query.setMaxResults(limit);
+        }
+        return query.list();
+    }
+   
+    public Integer getCount(String hql) {
+        Integer c = 0;
+        Query query = getSession().createQuery(hql);
+        Object count = query.uniqueResult();
+        if(null != count && StringUtils.isInteger(count.toString())) {
+            c = Integer.parseInt(count.toString());
+        }
+        return c;
+    }
+
+    public int executeHql(String hql) {
+        // TODO Auto-generated method stub
+        Query query = getSession().createQuery(hql);
+        
+        return query.executeUpdate();
+    }
+
+    public boolean IsFieldExist(String fieldName, String fieldValue, String id, String where) {
+        // TODO Auto-generated method stub
+        String pkName = ModelUtil.getClassPkName(entityClass);
+        StringBuffer hql = new StringBuffer("select count(*) from ");
+        hql.append(entityClass.getSimpleName());
+        hql.append(" as o where o." + fieldName);
+        hql.append(" = '" + fieldValue + "' ");
+        hql.append(" and o." + pkName + " <>'" + id +"'");
+        if(!StringUtils.isEmpty(where)) {
+            hql.append(" and " + where );
+        } 
+        Query query = getSession().createQuery(hql.toString());
+        return (Long)query.uniqueResult() >0;
+    }
+
+    public boolean IsFieldExist(String fieldName, String fieldValue, String id) {
+        // TODO Auto-generated method stub
+        return IsFieldExist(fieldName, fieldValue, id, null);
+    }    
 }

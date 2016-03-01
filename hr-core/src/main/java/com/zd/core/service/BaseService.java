@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import com.zd.core.domain.BaseEntity;
 import com.zd.core.domain.extjs.JSONTreeNode;
 import com.zd.core.support.BaseParameter;
 import com.zd.core.support.QueryResult;
@@ -306,4 +307,52 @@ public interface BaseService<E> {
      * @return
      */
     public List<JSONTreeNode> getTreeList(String rootId,String tableName,String whereSql,JSONTreeNode template,Boolean expanded);
+    
+    /**
+     * hql分页查询
+     * @param hql
+     * @param start
+     * @param limit
+     * @return
+     */
+    public List<E> queryByHql(String hql,Integer start,Integer limit);  
+    
+    /**
+     * 根据HQL查询条件查询总记录
+     * @param whereSql
+     * @return
+     */
+    public Integer getCount(String hql);
+    
+    /**
+     * 批量更新HQL语句
+     * @param updateSqls
+     */
+    public void executeBatchHql(String[] updateSqls);
+    
+    /**
+     * 获取实体最大排序号
+     * @param entity
+     * @return
+     */
+    public Integer getDefaultOrderIndex(E entity);
+    
+    /**
+     * 判断字段的值是否存在 如果是插入id赋值-1或者new Guid,如果是修改id赋值 要修改项的值
+     * @param fieldName 要判断的字段
+     * @param fieldValue 要判断的字段的值
+     * @param id 实体的标识
+     * @param where 附加查询条件
+     * @return
+     */
+    public boolean IsFieldExist( String fieldName, String fieldValue, String id, String where );
+    
+    /**
+     * 判断字段的值是否存在 如果是插入id赋值-1或者new Guid,如果是修改id赋值 要修改项的值
+     * @param fieldName 要判断的字段
+     * @param fieldValue 要判断的字段的值
+     * @param id 实体的标识
+     * @return
+     */
+    public boolean IsFieldExist( String fieldName, String fieldValue, String id );    
 }

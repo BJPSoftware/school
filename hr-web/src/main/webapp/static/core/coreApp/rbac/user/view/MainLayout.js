@@ -7,7 +7,7 @@ Ext.define("core.rbac.user.view.MainLayout",{
 		region:"west",
 		width:comm.get("clientWidth")*0.18
 	},{
-		xtype:"rbac.centerlayout",
+		xtype:"rbac.userlayout",
 		region:"center"
 	}]
 })

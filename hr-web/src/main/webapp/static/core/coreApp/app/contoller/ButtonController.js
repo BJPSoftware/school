@@ -137,7 +137,7 @@ Ext.define("core.app.contoller.ButtonController", {
                         });
                         // 发送ajax请求
                         var resObj = self.ajax({
-                            url: funData.action,
+                            url: funData.action + "/dodelete",
                             params: {
                                 ids: ids.join(","),
                                 pkName: pkName
@@ -170,6 +170,7 @@ Ext.define("core.app.contoller.ButtonController", {
                     // 得到配置信息
                     var funData = basePanel.funData;
                     var pkName = funData.pkName;
+                    var cmd = funData.cmd;
                     var store = baseGrid.getStore();
                     // 得到修改的记录
                     var records = store.getUpdatedRecords();
@@ -186,9 +187,10 @@ Ext.define("core.app.contoller.ButtonController", {
                             funData.modelName, funData.pkName);
                         //发送ajax
                         var resObj = self.ajax({
-                            url: funData.action ,
+                            url: funData.action + "/dosave" ,
                             params: {
-                                strData: strData
+                                strData: strData,
+                                cmd: cmd
                             }
                         });
                         if (resObj.success) {
@@ -197,7 +199,7 @@ Ext.define("core.app.contoller.ButtonController", {
                             alert(resObj.obj);
                         }
                     } else {
-                        self.msgbox("保存成功");
+                        self.msgbox("没有要保存的数据");
                     }
                     //执行回调函数
                     if (btn.callback) {
@@ -222,9 +224,20 @@ Ext.define("core.app.contoller.ButtonController", {
                     var formObj = baseForm.getForm();
                     var pkField = formObj.findField(pkName);
                     //判断当前是保存还是修改操作
-                    var act = Ext.isEmpty(pkField.getValue()) ? "doSave" : "doUpdate";
+                    var act = Ext.isEmpty(pkField.getValue()) ? "doadd" : "doupdate";
+                    if (!formObj.isValid()) {
+                        var errors = ["前台验证失败，错误信息："];
+                        formObj.getFields().each(
+                            function(f) {
+                                if (!f.isValid()) {
+                                    errors.push("<font color=red>" + f.fieldLabel + "</font>:" + f.getErrors().join(
+                                        ","));
+                                }
+                            });
+                        self.msgbox(errors.join("<br/>"));
+                    };
                     formObj.submit({
-                            url: funData.action + "!" + act + ".action",
+                            url: funData.action + "/" + act ,
                             params: {},
                             //可以提交空的字段值
                             submitEmptyText: true,
@@ -237,32 +250,21 @@ Ext.define("core.app.contoller.ButtonController", {
                                     self.setFormValue(formObj, obj);
                                     //load表格
                                     baseGrid.getStore().load();
-                                    if (act == "doSave") {
+                                    if (act == "doadd") {
                                         self.msgbox("数据添加成功");
                                     } else {
                                         self.msgbox("数据保存成功");
                                     }
                                 } else {
-                                    alert(obj);
+                                    self.msgbox(obj);
                                 }
                             },
                             //错误信息处理
                             failure: function(form, action) {
                                 //前台表单校验错误
-                                if (action.fieldureType == "client") {
-                                    var errors = ["前台验证失败，错误信息："];
-                                    formObj.getFields().each(
-                                        function(f) {
-                                            if (!f.isValid()) {
-                                                errors.push("<font color=red>" + f.fieldLabel + "</font>:" + f.getErrors().join(
-                                                    ","));
-                                            }
-                                        });
-                                    alert(errors.join("<br/>"));
-                                } else {
-                                    alert("后台数据保存错误");
+                                var obj = action.result.obj;
+                                    self.msgbox(obj);
                                 }
-                            }
                         })
                         //执行回调函数
                     if (btn.callback) {
