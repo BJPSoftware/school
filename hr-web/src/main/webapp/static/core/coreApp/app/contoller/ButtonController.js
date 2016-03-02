@@ -59,8 +59,6 @@ Ext.define("core.app.contoller.ButtonController", {
                         url: funData.action,
                         params: insertObj
                     });
-                    // var
-                    // resObj={success:true,obj:{name:"zsp",birthday:"2012-01-01"}};
                     if (resObj.success) {
                         var obj = new Model(resObj.obj);
                         edit.cancelEdit(); // 取消其他插件的编辑活动
@@ -99,15 +97,21 @@ Ext.define("core.app.contoller.ButtonController", {
                     var baseForm = basePanel.down("baseform[itemId=" + funCode + "_baseform]");
                     // 得到选中数据
                     var rescords = baseGrid.getSelectionModel().getSelection();
-                    if (rescords.length == 1) {
+                    if (rescords.length == 0) {
+                        self.msgbox("请选择数据");
+                    } else if (rescords.length > 1) {
+                        self.msgbox("只能修改一条数据,请重新选择!");
+                    } else  if (rescords[0].get("isDelete")==1) {
+                        self.msgbox("当前记录为删除状态，不能再修改");
+                    } else {
+                        alert(rescords[0].get("isDelete"));
                         var data = rescords[0].data;
                         // 表单赋值
                         self.setFormValue(baseForm.getForm(), data);
                         baseForm.show();
                         baseGrid.hide();
-                    } else {
-                        alert("请选择数据");
                     }
+
                     // 执行回调函数
                     if (btn.callback) {
                         btn.callback();
@@ -147,10 +151,10 @@ Ext.define("core.app.contoller.ButtonController", {
                             baseGrid.getStore().load();
                             self.msgbox(resObj.obj);
                         } else {
-                            alert(resObj.obj);
+                            self.msgbox(resObj.obj);
                         }
                     } else {
-                        alert("请选择数据!");
+                        self.msgbox("请选择数据!");
                     }
                     // 执行回调函数
                     if (btn.callback) {
@@ -187,7 +191,7 @@ Ext.define("core.app.contoller.ButtonController", {
                             funData.modelName, funData.pkName);
                         //发送ajax
                         var resObj = self.ajax({
-                            url: funData.action + "/dosave" ,
+                            url: funData.action + "/dosave",
                             params: {
                                 strData: strData,
                                 cmd: cmd
@@ -208,6 +212,51 @@ Ext.define("core.app.contoller.ButtonController", {
 
                 }
             },
+            /**
+             * 通用表格还原已删除事件
+             */
+            "basegrid button[ref=gridRestore]": {
+                click: function(btn) {
+                    // 得到组件
+                    var baseGrid = btn.up("basegrid");
+                    var funCode = baseGrid.funCode;
+                    var basePanel = baseGrid.up("basepanel[itemId=" + funCode + "_basepanel]");
+                    // 得到配置信息
+                    var funData = basePanel.funData;
+                    var pkName = funData.pkName;
+                    // 得到选中数据
+                    var records = baseGrid.getSelectionModel().getSelection();
+                    if (records.length>0){
+                        //封装ids数组
+                        var ids = new Array();
+                        Ext.each(records, function(rec) {
+                            var pkValue = rec.get(pkName);
+                            ids.push(pkValue);
+                        }); 
+                        // 发送ajax请求
+                        var resObj = self.ajax({
+                            url: funData.action + "/dorestore",
+                            params: {
+                                ids: ids.join(","),
+                                pkName: pkName
+                            }
+                        });  
+                        if (resObj.success) {
+                            baseGrid.getStore().load();
+                            self.msgbox(resObj.obj);
+                        } else {
+                            self.msgbox(resObj.obj);
+                        }                                                                     
+                    }
+                    else {
+                        self.msgbox("请选择要还原的记录");
+                    }
+                    // 执行回调函数
+                    if (btn.callback) {
+                        btn.callback();
+                    }
+                }
+            },            
             /**
              * 表单的保存
              */
@@ -237,7 +286,7 @@ Ext.define("core.app.contoller.ButtonController", {
                         self.msgbox(errors.join("<br/>"));
                     };
                     formObj.submit({
-                            url: funData.action + "/" + act ,
+                            url: funData.action + "/" + act,
                             params: {},
                             //可以提交空的字段值
                             submitEmptyText: true,
@@ -263,8 +312,8 @@ Ext.define("core.app.contoller.ButtonController", {
                             failure: function(form, action) {
                                 //前台表单校验错误
                                 var obj = action.result.obj;
-                                    self.msgbox(obj);
-                                }
+                                self.msgbox(obj);
+                            }
                         })
                         //执行回调函数
                     if (btn.callback) {

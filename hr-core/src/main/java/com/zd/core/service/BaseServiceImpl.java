@@ -29,6 +29,14 @@ public class BaseServiceImpl<E> implements BaseService<E> {
         return this.dao.deleteByPK(id);
     }
 
+    public boolean deleteByPK(String ids){
+        return this.dao.deleteByPK(ids);
+    }
+    
+    public boolean logicDelOrRestore(String ids,String isDelete){
+        return this.dao.logicDelOrRestore(ids, isDelete);
+    }
+    
     public void delete(E entity) {
         this.dao.delete(entity);
     }

@@ -10,8 +10,8 @@ import java.util.Date;
  *
  */
 public class DateUtil {
-	public static String DEFAULT_DATE_FORMAT="";
-	public static String DEFAULT_TIME_FORMAT="";
+	public static String DEFAULT_DATE_FORMAT="yyyy-MM-dd";
+	public static String DEFAULT_TIME_FORMAT="yyyy-MM-dd";
 	static{
 		DEFAULT_DATE_FORMAT=PropUtil.get("sys.commons.dateFormat");
 		DEFAULT_TIME_FORMAT=PropUtil.get("sys.commons.timeFormat");

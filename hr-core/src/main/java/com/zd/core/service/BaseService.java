@@ -27,6 +27,20 @@ public interface BaseService<E> {
 	 */
 	public boolean deleteByPK(Serializable... id);
 
+	 /**
+     * 逻辑删除记录
+     * @param ids 要删除的主键ID
+     * @return
+     */
+    public boolean deleteByPK(String ids);
+
+    /**
+     * 逻辑删除或还原指定的记录
+     * @param ids 要处理的记录的ID
+     * @param isDelete 处理标记
+     * @return
+     */
+    public boolean logicDelOrRestore(String ids,String isDelete);
 	/**
 	 * 删除对象实体
 	 * @param entity 对象实体

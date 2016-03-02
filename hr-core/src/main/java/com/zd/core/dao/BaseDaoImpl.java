@@ -83,6 +83,24 @@ public class BaseDaoImpl<E> implements BaseDao<E> {
         return result;
     }
 
+    public boolean deleteByPK(String ids){
+        String delIds = "'" + ids.replace(",", "','") + "'";
+        String pkName = ModelUtil.getClassPkName(entityClass);
+        String entityName = entityClass.getSimpleName();
+        
+        String hql = "UPDATE " + entityName + " SET isDelete='1' WHERE " + pkName + " IN (" + delIds + ")";       
+        
+        return executeHql(hql)>0 ;
+    }
+    public boolean logicDelOrRestore(String ids,String isDelete){
+        String restoreIds = "'" + ids.replace(",", "','") + "'";
+        String pkName = ModelUtil.getClassPkName(entityClass);
+        String entityName = entityClass.getSimpleName();
+        
+        String hql = "UPDATE " + entityName + " SET isDelete='" + isDelete +"' WHERE " + pkName + " IN (" + restoreIds + ")";       
+        
+        return executeHql(hql)>0 ;        
+    }
     public void deleteByProperties(String[] propName, Object[] propValue) {
         if ((propName != null) && (propName.length > 0) && (propValue != null) && (propValue.length > 0)
                 && (propValue.length == propName.length)) {

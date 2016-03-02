@@ -1,15 +1,22 @@
 package com.zd.hr.domain.sys;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.zd.core.annotation.FieldInfo;
 import com.zd.core.domain.BaseEntity;
+import com.zd.core.util.DateTimeSerializer;
 
 /**
  * 系统用户实体类
@@ -43,7 +50,12 @@ public class SysUser extends BaseEntity {
     @FieldInfo(name="用户状态")
     @Column(name="USER_STATU", columnDefinition="int")
     private Integer userStatu; 
-   
+    
+    @FieldInfo(name="最后登录时间")
+    @Column(name="LAST_LOGIN", columnDefinition = "datetime")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLogin; 
+    
     @FieldInfo(name="部门ID")
     @Column (name="DEPT_ID")
     private String deptId;
@@ -55,6 +67,10 @@ public class SysUser extends BaseEntity {
     @FieldInfo(name="部门代码")
     @Column(name="DEPT_CODE")
     private String deptCode;
+    
+    @FieldInfo(name="下次自动登录")
+    @Transient
+    private boolean rememberMe; // 下次自动登录
     
     public String getUserId() {
         return userId;
@@ -118,5 +134,22 @@ public class SysUser extends BaseEntity {
 
     public void setDeptCode(String deptCode) {
         this.deptCode = deptCode;
+    }
+
+    @JsonSerialize(using=DateTimeSerializer.class)
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }

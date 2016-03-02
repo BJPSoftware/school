@@ -1,6 +1,7 @@
 package com.zd.hr.controller.login;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -9,7 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 
 import com.zd.core.controller.BaseController;
 import com.zd.hr.domain.sys.SysUser;
@@ -37,15 +42,15 @@ public class LoginController extends BaseController<SysUser> {
             writeJSON(response, result);
             return;
         }
-//        sysUser.setLastLoginTime(new Date());
+//        sysUser.setLastLogin(new Date());
 //        sysUserService.merge(sysUser);
 //        Subject subject = SecurityUtils.getSubject();
-//        subject.login(new UsernamePasswordToken(sysUserModel.getEmail(), sysUserModel.getPassword(), sysUserModel.isRememberMe()));
+//        subject.login(new UsernamePasswordToken(sysUserModel.getUserName(), sysUserModel.getUserPwd(), sysUserModel.isRememberMe()));
 //        Session session = subject.getSession();
 //        session.setAttribute(SESSION_SYS_USER, sysUser);
 //        session.setAttribute("ROLE_KEY", sysUser.getRoles().iterator().next().getRoleKey());
-        result.put("result", 1);
-        writeJSON(response, result);
+//        result.put("result", 1);
+//        writeJSON(response, result);
     }
     
     @RequestMapping("/desktop")

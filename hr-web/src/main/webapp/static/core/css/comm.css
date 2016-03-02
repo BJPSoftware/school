@@ -79,6 +79,9 @@
 .table_save{
 	background-image: url(./image/tabel_save.png) !important;
 }
+.table_restore{
+    background-image: url(./image/tabel_save.png) !important;
+}
 .system_edit{
 	background-image: url(./image/system_edit.png) !important;
 }
