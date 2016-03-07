@@ -49,8 +49,8 @@ public class LoginController extends BaseController<SysUser> {
 //        Session session = subject.getSession();
 //        session.setAttribute(SESSION_SYS_USER, sysUser);
 //        session.setAttribute("ROLE_KEY", sysUser.getRoles().iterator().next().getRoleKey());
-//        result.put("result", 1);
-//        writeJSON(response, result);
+        result.put("result", 1);
+        writeJSON(response, result);
     }
     
     @RequestMapping("/desktop")
